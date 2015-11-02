@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17D1AAF51BD5EBDD00C23E12"
+               BuildableName = "BLSmartPhoneDemo.app"
+               BlueprintName = "BLSmartPhoneDemo"
+               ReferencedContainer = "container:BLSmartPhoneDemo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -12,7 +28,36 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17D1AB0E1BD5EBDD00C23E12"
+               BuildableName = "BLSmartPhoneDemoTests.xctest"
+               BlueprintName = "BLSmartPhoneDemoTests"
+               ReferencedContainer = "container:BLSmartPhoneDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17D1AB191BD5EBDD00C23E12"
+               BuildableName = "BLSmartPhoneDemoUITests.xctest"
+               BlueprintName = "BLSmartPhoneDemoUITests"
+               ReferencedContainer = "container:BLSmartPhoneDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "17D1AAF51BD5EBDD00C23E12"
+            BuildableName = "BLSmartPhoneDemo.app"
+            BlueprintName = "BLSmartPhoneDemo"
+            ReferencedContainer = "container:BLSmartPhoneDemo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -26,6 +71,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "17D1AAF51BD5EBDD00C23E12"
+            BuildableName = "BLSmartPhoneDemo.app"
+            BlueprintName = "BLSmartPhoneDemo"
+            ReferencedContainer = "container:BLSmartPhoneDemo.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -35,6 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "17D1AAF51BD5EBDD00C23E12"
+            BuildableName = "BLSmartPhoneDemo.app"
+            BlueprintName = "BLSmartPhoneDemo"
+            ReferencedContainer = "container:BLSmartPhoneDemo.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
