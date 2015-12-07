@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BLACCell : UITableViewCell
+- (id)initWithParentViewController:(UIViewController *)parentViewController;
 - (void)setACWithName:(NSString *)ACName detailDict:(NSDictionary *)detailDict;
-- (void)readItemState;
-- (void)initPanelItemValue;
+- (void)setACWithName:(NSString *)ACName detailDict:(NSDictionary *)detailDict reuseIdentifier:(NSString *)reuseId;
 @end

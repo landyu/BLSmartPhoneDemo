@@ -301,7 +301,7 @@ withFilterContext:(id)filterContext
             ackData = [NSMutableData dataWithBytes:ackByte length:sizeof(ackByte)];
             
             [self tunnellingUdpSocketSend:ackData];
-            LogInfo(@"SENT (%i): Request ACK CID %u  SC %u", (int)tunnellingSocketTag, CID, testByte[8]);
+            LogInfo(@"SENT (%i): Request ACK CID %u  SC %u  testByte[10] = %x", (int)tunnellingSocketTag, CID, testByte[8], testByte[10]);
             
             if (testByte[10] == 0x29)  //L_Data.ind
             {

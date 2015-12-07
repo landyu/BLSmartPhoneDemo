@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ItemsViewController : UIViewController
+@interface Scene : NSObject {
+@public
+    NSString *sceneName;
+    UIButton *button;
+    NSDictionary *buttonInfoDict;
+}
+- (id)init;
+@end
+
+@interface ItemsViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @end

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACPopupViewController">
+            <connections>
+                <outlet property="environmentTemperatureLabel" destination="ws2-Kq-ZqG" id="ury-hW-9op"/>
+                <outlet property="modeLabel" destination="xQj-KM-BRe" id="x09-47-8Bg"/>
+                <outlet property="onOffButtonOutlet" destination="Msz-60-Bi0" id="i4O-k6-wWB"/>
+                <outlet property="popupViewLabel" destination="VGZ-Oq-pfo" id="O32-fP-JFS"/>
+                <outlet property="settingTemperatureLabel" destination="j2Q-9w-ZEr" id="SsD-pr-hcW"/>
+                <outlet property="view" destination="KEk-QR-ltZ" id="jYE-S5-RnB"/>
+                <outlet property="windSpeedLabel" destination="BJV-Tt-juX" id="pHf-sv-Aa2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="KEk-QR-ltZ">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeB-yR-kv4">
+                    <rect key="frame" x="162" y="433" width="51" height="30"/>
+                    <animations/>
+                    <state key="normal" title="退出">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelButtonPressed:" destination="-1" eventType="touchUpInside" id="ihi-B0-Euu"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="空调" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGZ-Oq-pfo">
+                    <rect key="frame" x="123" y="92" width="129" height="43"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DigitalFrame" translatesAutoresizingMaskIntoConstraints="NO" id="Ar6-cP-vxk">
+                    <rect key="frame" x="128" y="150" width="118" height="107"/>
+                    <animations/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LittleDigitalBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Z1u-El-ZdI">
+                    <rect key="frame" x="128" y="279" width="118" height="40"/>
+                    <animations/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7FH-Ix-UC4">
+                    <rect key="frame" x="75" y="279" width="40" height="40"/>
+                    <animations/>
+                    <state key="normal" image="+"/>
+                    <connections>
+                        <action selector="settingTemperatureUpButton:" destination="-1" eventType="touchUpInside" id="AhX-Pu-64c"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msz-60-Bi0">
+                    <rect key="frame" x="147" y="345" width="80" height="80"/>
+                    <animations/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onOffButtonPressed:" destination="-1" eventType="touchUpInside" id="pHP-1U-D2E"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5Z-Q3-7Xq">
+                    <rect key="frame" x="263" y="279" width="40" height="40"/>
+                    <animations/>
+                    <state key="normal" image="-0"/>
+                    <connections>
+                        <action selector="settingTemperatureDownButton:" destination="-1" eventType="touchUpInside" id="AEY-kB-wQI"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="88" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2Q-9w-ZEr">
+                    <rect key="frame" x="128" y="279" width="118" height="40"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="88" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ws2-Kq-ZqG">
+                    <rect key="frame" x="128" y="150" width="118" height="107"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="81"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IE-gh-mlQ">
+                    <rect key="frame" x="25" y="422" width="90" height="50"/>
+                    <animations/>
+                    <state key="normal" title="模式" backgroundImage="BlackRectangularBtuoon">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonPressed:" destination="-1" eventType="touchUpInside" id="sRM-cR-1sz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyc-za-H4O">
+                    <rect key="frame" x="263" y="422" width="90" height="50"/>
+                    <animations/>
+                    <state key="normal" title="风速" backgroundImage="BlackRectangularBtuoon">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="windSpeedButtonPressed:" destination="-1" eventType="touchUpInside" id="mAO-Pd-JT9"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="制冷" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQj-KM-BRe">
+                    <rect key="frame" x="25" y="367" width="90" height="21"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJV-Tt-juX">
+                    <rect key="frame" x="271" y="367" width="75" height="21"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="349.5" y="425"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="+" width="64" height="64"/>
+        <image name="-0" width="64" height="64"/>
+        <image name="BlackRectangularBtuoon" width="129" height="62"/>
+        <image name="DigitalFrame" width="207" height="149"/>
+        <image name="LittleDigitalBackground" width="139" height="61"/>
+    </resources>
+</document>

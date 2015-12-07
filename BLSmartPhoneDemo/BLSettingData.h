@@ -11,6 +11,7 @@
 @interface BLSettingData : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSString *deviceIPAddress;
+@property (strong, nonatomic) NSMutableArray *likeItemsArray;
 +(instancetype)sharedSettingData;
 -(void)save;
 @end

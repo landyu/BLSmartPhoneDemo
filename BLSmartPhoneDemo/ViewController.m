@@ -12,31 +12,14 @@
 #import "BLGCDKNXTunnellingAsyncUdpSocket.h"
 
 
-@interface Scene : NSObject {
-@public
-    NSString *sceneName;
-    UIButton *button;
-    NSDictionary *buttonInfoDict;
-}
-- (id)init;
-@end
 
-@implementation Scene
-
-- (id)init
-{
-    self = [super init];
-    return self;
-}
-
-@end
 
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSDictionary* roomListDict;
     NSDictionary* sceneDict;
-    UITableView *tableView;
+    UITableView *frontPageTableView;
     NSMutableArray *rooms;
     NSIndexPath *selectedIndexPath;//当前选中的组和行
     
@@ -45,6 +28,9 @@
     NSMutableArray *sceneArray;
     
     BLGCDKNXTunnellingAsyncUdpSocket *tunnellingShareInstance;
+    
+    float sceneButtonHeight;
+    float sceneButtonWidth;
 }
 
 @end
@@ -58,13 +44,28 @@
     [self initData];
     
     //创建一个分组样式的UITableView
-    tableView=[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    frontPageTableView=[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     
     //设置数据源，注意必须实现对应的UITableViewDataSource协议
-    tableView.dataSource = self;
-    tableView.delegate = self;
+    frontPageTableView.dataSource = self;
+    frontPageTableView.delegate = self;
+    frontPageTableView.backgroundColor = [UIColor clearColor];
+    [frontPageTableView setSeparatorColor:[UIColor clearColor]];
+    frontPageTableView.autoresizingMask= UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    //self.view.backgroundColor = [UIColor clearColor];
     
-    [self.view addSubview:tableView];
+    //tableView.alpha = 0.5;
+    //self.view.alpha = 0.5;
+    UIColor *color = [UIColor clearColor];
+    self.view.backgroundColor = [color colorWithAlphaComponent:0.3];
+    
+    [self.view addSubview:frontPageTableView];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [frontPageTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,12 +75,36 @@
 
 -(void)initData
 {
+    
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [documentPaths objectAtIndex:0];
+    NSString* roomInfoDirPath = [documentPath stringByAppendingPathComponent:@"RoomInfo"];
+    NSString *propertyConfigPath = [roomInfoDirPath stringByAppendingPathComponent:@"PropertyConfig.plist"];
+    sceneButtonHeight = 60.0;
+    sceneButtonWidth = 98.0;
+    
+    BOOL isDir = YES;
+    BOOL existed = [[NSFileManager defaultManager] fileExistsAtPath:roomInfoDirPath isDirectory:&isDir];
+    if ((isDir == YES && existed == YES))
+    {
+        isDir = NO;
+        existed = [[NSFileManager defaultManager] fileExistsAtPath:propertyConfigPath isDirectory:&isDir];
+        if (existed == NO)
+        {
+            return;
+        }
+    }
+    else
+    {
+        return;
+    }
+    
     sceneArray = [[NSMutableArray alloc] init];
-    sceneCell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    //sceneCell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     tunnellingShareInstance  = [BLGCDKNXTunnellingAsyncUdpSocket sharedInstance];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"PropertyConfig" ofType:@"plist"];
-    NSDictionary *temDict = [[NSDictionary alloc]initWithContentsOfFile:path];
+    //NSString *path = [[NSBundle mainBundle] pathForResource:@"PropertyConfig" ofType:@"plist"];
+    NSDictionary *temDict = [[NSDictionary alloc]initWithContentsOfFile:propertyConfigPath];
     
     roomListDict = [[NSDictionary alloc] initWithDictionary:[temDict objectForKey:@"RoomList"]];
     
@@ -127,24 +152,71 @@
                   UIButton *sceneButoon = [UIButton buttonWithType:UIButtonTypeRoundedRect];
                   if (currentSceneItemRowIndex == 0)
                   {
-                      sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * 50 + 100, 10, 50, 50);
+                      if (currentSceneItemColumnIndex == 0)
+                      {
+                          sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * sceneButtonWidth + 60, 15, sceneButtonWidth, sceneButtonHeight);
+                      }
+                      else
+                      {
+                          sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * (sceneButtonWidth  + 15) + 60, 15, sceneButtonWidth, sceneButtonHeight);
+                      }
+                      
                   }
                   else
                   {
-                      sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * 50 + 100, (currentSceneItemRowIndex) * 50 + 10, 50, 50);
+                      if (currentSceneItemColumnIndex == 0)
+                      {
+                          sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * sceneButtonWidth + 60, (currentSceneItemRowIndex) * (sceneButtonHeight + 10) + 15, sceneButtonWidth, sceneButtonHeight);
+                      }
+                      else
+                      {
+                          sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * (sceneButtonWidth  + 15) + 60, (currentSceneItemRowIndex) * (sceneButtonHeight + 10) + 15, sceneButtonWidth, sceneButtonHeight);
+                      }
+                      
                   }
                   
-                  if (currentSceneItemIndex % 2)
-                  {
-                      sceneButoon.backgroundColor = [UIColor greenColor];
-                  }
-                  else
-                  {
-                      sceneButoon.backgroundColor = [UIColor redColor];
-                  }
+//                  if (currentSceneItemIndex % 2)
+//                  {
+//                      sceneButoon.backgroundColor = [UIColor greenColor];
+//                  }
+//                  else
+//                  {
+//                      sceneButoon.backgroundColor = [UIColor redColor];
+//                  }
+                  UIImage *image = [UIImage imageNamed: @"SceneButtonSelect"];
+//                  CGSize size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(0.1, 0.1));
+//                  BOOL hasAlpha = false;
+//                  CGFloat scale =  0.0; // Automatically use scale factor of main screen
+//                  
+//                  UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale);
+//                  //image.drawInRect(CGRect(origin: CGPointZero, size: size));
+//                  [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+                  
+                  [sceneButoon setBackgroundImage:image forState:UIControlStateNormal];
+//                  UIGraphicsEndImageContext();
+
+                  image = [UIImage imageNamed: @"SceneButtonNormal"];
+//                  size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(0.1, 0.1));
+//                  hasAlpha = false;
+//                  scale =  0.0; // Automatically use scale factor of main screen
+//                  
+//                  UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale);
+//                  //image.drawInRect(CGRect(origin: CGPointZero, size: size));
+//                  [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+                  
+                  [sceneButoon setBackgroundImage:image forState:UIControlStateSelected];
+                  //UIGraphicsEndImageContext();
+                  
+                  
+                  //[sceneButoon setBackgroundImage:[UIImage imageNamed:@"SceneButtonNormal.png"] forState:UIControlStateNormal];
+                  //[sceneButoon setImage:[UIImage imageNamed:@"SceneButtonSelect.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+                  //sceneButoon.backgroundColor = [UIColor clearColor];
                   [sceneButoon setTitle:sceneItem->sceneName forState:UIControlStateNormal];
-                  sceneButoon.translatesAutoresizingMaskIntoConstraints = NO;
-                  [sceneButoon addTarget:self action:@selector(sceneButoonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                  [sceneButoon setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                  //sceneButoon.titleLabel.text = sceneItem->sceneName;
+                  //sceneButoon.titleLabel.textColor = [UIColor whiteColor];
+                  //sceneButoon.translatesAutoresizingMaskIntoConstraints = NO;
+                  [sceneButoon addTarget:self action:@selector(sceneButoonPressed:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchDown];
                   
                   sceneItem->button = sceneButoon;
                   
@@ -153,12 +225,12 @@
          }
     // }];
     
-    sceneCellHight = (([sceneArray count] - 1) / 3 + 1) * 50 + 20;
-    for (id obj in sceneArray)
-    {
-        Scene *sceneItem = obj;
-        [sceneCell addSubview:sceneItem->button];
-    }
+    sceneCellHight = (([sceneArray count] - 1) / 3 + 1) * (sceneButtonHeight + 15) + 20;
+//    for (id obj in sceneArray)
+//    {
+//        Scene *sceneItem = obj;
+//        [sceneCell addSubview:sceneItem->button];
+//    }
     
 //    UIButton *sceneButoon = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    sceneButoon.frame = CGRectMake(50 + 50, 10, 50, 50);
@@ -184,6 +256,8 @@
     
     
 }
+
+
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -222,20 +296,83 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
+    //UITableViewCell *cell;
+    NSString *cellIdentifier = [NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row];
+    UITableViewCell *cell = [frontPageTableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell != nil)
+    {
+        return cell;
+    }
     
     if (indexPath.section == 0)
     {
+        sceneCell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        for (id obj in sceneArray)
+        {
+            Scene *sceneItem = obj;
+            [sceneCell addSubview:sceneItem->button];
+        }
         cell = sceneCell;
+        
+        
+        UIView *bgView = [[UIView alloc] init];
+        bgView.backgroundColor = [UIColor clearColor];
+        
+        //    UIVisualEffectView *visualEfView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+        //    visualEfView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, cell.frame.size.height);
+        //    visualEfView.alpha = 0.3;
+        //    visualEfView.opaque = true;
+        //    [bgView addSubview:visualEfView];
+        
+        cell.selectedBackgroundView = bgView;
+        cell.backgroundView = bgView;
     }
     else if(indexPath.section == 1)
     {
-        UITableViewCell *roomCell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        UITableViewCell *roomCell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         NSString *roomName = rooms[indexPath.row];
         roomCell.textLabel.text=roomName;
+        roomCell.textLabel.textColor = [UIColor whiteColor];
         roomCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell = roomCell;
+        
+        UIGraphicsBeginImageContext(cell.bounds.size);
+        [[UIImage imageNamed:@"CellBackground"] drawInRect:cell.bounds];
+        UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        cell.backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
+        
+        UIView *bgView = [[UIView alloc] init];
+        bgView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.3];
+        
+        //    UIVisualEffectView *visualEfView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+        //    visualEfView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, cell.frame.size.height);
+        //    visualEfView.alpha = 0.3;
+        //    visualEfView.opaque = true;
+        //    [bgView addSubview:visualEfView];
+        
+        cell.selectedBackgroundView = bgView;
+        
+        UIImage *image = [UIImage imageNamed: @"RoomIcon"];
+        
+        CGSize size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(0.5, 0.5));
+        BOOL hasAlpha = true;
+        CGFloat scale =  0.0; // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale);
+        //image.drawInRect(CGRect(origin: CGPointZero, size: size));
+        [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        
+        cell.imageView.image  = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
     }
+    
+    
+    
+    //bgView.alpha = 0.1;//This setting has no effect
+    
+    
+    
     return cell;
 }
 
@@ -274,6 +411,7 @@
 
 - (void) sceneButoonPressed:(UIButton *)sender
 {
+
     NSString *sceneName = [sender titleForState:UIControlStateNormal];
     
     for (id obj in sceneArray)
@@ -287,6 +425,11 @@
             [tunnellingShareInstance tunnellingSendWithDestGroupAddress:writeToGroupAddress value:[sceneNumber integerValue] buttonName:nil valueLength:@"1Byte" commandType:@"Write"];
         }
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]];
 }
 
 //#pragma mark 窗口的代理方法，用户保存数据

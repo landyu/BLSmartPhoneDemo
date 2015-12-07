@@ -8,49 +8,60 @@
 
 #import "BLCurtainCell.h"
 #import "GlobalMacro.h"
-#import "BLGCDKNXTunnellingAsyncUdpSocket.h"
+//#import "BLGCDKNXTunnellingAsyncUdpSocket.h"
+#import "BLSmartPhoneDemo-Swift.h"
+#import "CurtainPopupViewController.h"
+#import "UIViewController+CWPopup.h"
 
-@interface Curtain : NSObject {
-@public
-    NSString *openCloseWriteToGroupAddress;
-    NSString *stopWriteToGroupAddress;
-    NSString *moveToPositionWriteToGroupAddress;
-    NSString *positionStatusReadFromGroupAddress;
-    NSUInteger curtainPosition;
-}
-- (id)init;
-@end
-
-@implementation Curtain
-
-- (id)init
-{
-    self = [super init];
-    return self;
-}
-
-@end
+//@interface Curtain : NSObject {
+//@public
+//    NSString *openCloseWriteToGroupAddress;
+//    NSString *stopWriteToGroupAddress;
+//    NSString *moveToPositionWriteToGroupAddress;
+//    NSString *positionStatusReadFromGroupAddress;
+//    NSUInteger curtainPosition;
+//}
+//- (id)init;
+//@end
+//
+//@implementation Curtain
+//
+//- (id)init
+//{
+//    self = [super init];
+//    return self;
+//}
+//
+//@end
 
 @interface BLCurtainCell()
 {
     NSDictionary *itemDetailDict;
     Curtain *curtain;
+    NSString *itemName;
     
-    BLGCDKNXTunnellingAsyncUdpSocket *tunnellingShareInstance;
-    NSMutableDictionary *overallRecevedKnxDataDict;
+    //BLGCDKNXTunnellingAsyncUdpSocket *tunnellingShareInstance;
+    //NSMutableDictionary *overallRecevedKnxDataDict;
+    NSString *cellReuseIdentifier;
+    
+    UIViewController *parentVC;
 }
-@property (strong, nonatomic) IBOutlet UILabel *curtainNameLabel;
-@property (strong, nonatomic) IBOutlet UISlider *curtainSliderOutlet;
-- (IBAction)curtainOpenButtonPressed:(UIButton *)sender;
-- (IBAction)curtainCloseButtonPressed:(UIButton *)sender;
-- (IBAction)curtainStopButtonPressed:(UIButton *)sender;
-- (IBAction)curtainSliderButtonPressed:(UISlider *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *curtainLabelButtonOutlet;
 
 @end
 
 @implementation BLCurtainCell
-@synthesize curtainNameLabel;
-@synthesize curtainSliderOutlet;
+
+- (id)initWithParentViewController:(UIViewController *)parentViewController
+{
+    self = [self init];
+    if (self)
+    {
+        parentVC = parentViewController;
+    }
+    return  self;
+}
+
 - (id)init
 {
     self = [[[NSBundle mainBundle] loadNibNamed:@"BLCurtainCell" owner:self options:nil] objectAtIndex:0];
@@ -58,14 +69,20 @@
     {
         // any further initialization
         curtain = [[Curtain alloc] init];
-        tunnellingShareInstance  = [BLGCDKNXTunnellingAsyncUdpSocket sharedInstance];
-        overallRecevedKnxDataDict = tunnellingShareInstance.overallReceivedKnxDataDict;
     }
     return self;
 }
 
 - (void)awakeFromNib {
     // Initialization code
+    UIGraphicsBeginImageContext(self.bounds.size);
+    [[UIImage imageNamed:@"CellBackground"] drawInRect:self.bounds];
+    UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
+    self.backgroundColor = [UIColor clearColor];
+    self.separatorInset = UIEdgeInsetsZero;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -76,100 +93,41 @@
 
 - (void)setCurtainWithName:(NSString *)curtainName detailDict:(NSDictionary *)detailDict
 {
-    curtainNameLabel.text = curtainName;
+    //curtainNameLabel.text = curtainName;
+    itemName = curtainName;
+    [_curtainLabelButtonOutlet setTitle:curtainName forState:UIControlStateNormal];
     itemDetailDict = detailDict;
-    [itemDetailDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+}
+
+- (void)setCurtainWithName:(NSString *)curtainName detailDict:(NSDictionary *)detailDict reuseIdentifier:(NSString *)reuseId
+{
+    [self setCurtainWithName:curtainName detailDict:detailDict];
+    cellReuseIdentifier = reuseId;
+}
+
+- (NSString *)reuseIdentifier
+{
+    return cellReuseIdentifier;
+}
+
+- (IBAction)curtainLabelButtonPressed:(UIButton *)sender
+{
+    CurtainPopupViewController *curtainPopupViewController = [[CurtainPopupViewController alloc] initWithItemDetailDict:itemDetailDict itemName:itemName];
+    curtainPopupViewController.delegate = self;
+    [parentVC presentPopupViewController:curtainPopupViewController animated:YES completion:^(void)
      {
-         if ([key isEqualToString:@"Curtain"])
-         {
-             NSDictionary *yarnCurtainDict = (NSDictionary *)obj;
-             [yarnCurtainDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-              {
-                  if ([key isEqualToString:@"OpenClose"])
-                  {
-                      curtain->openCloseWriteToGroupAddress = (NSString *)obj;
-                  }
-                  else if ([key isEqualToString:@"Stop"])
-                  {
-                      curtain->stopWriteToGroupAddress = (NSString *)obj;
-                  }
-                  else if ([key isEqualToString:@"MoveToPosition"])
-                  {
-                      curtain->moveToPositionWriteToGroupAddress = (NSString *)obj;
-                  }
-                  else if ([key isEqualToString:@"StatusHeight"])
-                  {
-                      curtain->positionStatusReadFromGroupAddress = (NSString *)obj;
-                  }
-              }];
-         }
      }];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recvFromBus:) name:@"BL.BLSmartPageViewDemo.RecvFromBus" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tunnellingConnectSuccess) name:TunnellingConnectSuccessNotification object:nil];
 }
 
-- (void)readItemState
-{
-    
-    [tunnellingShareInstance tunnellingSendWithDestGroupAddress:curtain->positionStatusReadFromGroupAddress value:0 buttonName:nil valueLength:@"1Byte" commandType:@"Read"];
-}
 
-- (void)initPanelItemValue
+- (void) curtainPopupViewCancelButtonPressed
 {
-    if (overallRecevedKnxDataDict != nil)
-    {
-        NSString *objectValue = [overallRecevedKnxDataDict objectForKey:curtain->positionStatusReadFromGroupAddress];
-        [self curtainPositionChangedWithValue:[objectValue integerValue]];
+    if (parentVC.popupViewController != nil) {
+        [parentVC dismissPopupViewControllerAnimated:YES completion:
+         ^{
+         }];
     }
 }
 
-- (IBAction)curtainOpenButtonPressed:(UIButton *)sender
-{
-    [tunnellingShareInstance tunnellingSendWithDestGroupAddress:curtain->openCloseWriteToGroupAddress value:1 buttonName:nil valueLength:@"1Bit" commandType:@"Write"];
-}
-
-- (IBAction)curtainCloseButtonPressed:(UIButton *)sender
-{
-    [tunnellingShareInstance tunnellingSendWithDestGroupAddress:curtain->openCloseWriteToGroupAddress value:0 buttonName:nil valueLength:@"1Bit" commandType:@"Write"];
-}
-
-- (IBAction)curtainStopButtonPressed:(UIButton *)sender
-{
-    [tunnellingShareInstance tunnellingSendWithDestGroupAddress:curtain->stopWriteToGroupAddress value:1 buttonName:nil valueLength:@"1Bit" commandType:@"Write"];
-}
-
-- (IBAction)curtainSliderButtonPressed:(UISlider *)sender
-{
-    NSInteger sendValue = (NSInteger)sender.value;
-    [tunnellingShareInstance tunnellingSendWithDestGroupAddress:curtain->moveToPositionWriteToGroupAddress value:sendValue buttonName:nil valueLength:@"1Byte" commandType:@"Write"];
-}
-
-
-- (void)curtainPositionChangedWithValue:(NSUInteger)position
-{
-    dispatch_async(dispatch_get_main_queue(),
-                   ^{
-                       curtainSliderOutlet.value = position;
-                   });
-}
-
-#pragma mark Receive From Bus
-- (void) recvFromBus: (NSNotification*) notification
-{
-    NSDictionary *dict = [notification userInfo];
-    if ([dict[@"Address"] isEqualToString:curtain->positionStatusReadFromGroupAddress])
-    {
-        NSUInteger value = [dict[@"Value"] intValue];
-        //NSLog(@"receive value = %lu", (unsigned long)value);
-        
-        [self curtainPositionChangedWithValue:value];
-    }
-}
-
-- (void) tunnellingConnectSuccess
-{
-    [self readItemState];
-}
 
 @end

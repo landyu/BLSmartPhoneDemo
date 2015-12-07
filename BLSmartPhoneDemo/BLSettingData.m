@@ -12,11 +12,13 @@
 @implementation BLSettingData
 
 static NSString* const BLSettingDataDeviceIPAddressKey = @"deviceIPAddress";
+static NSString* const BLSettingDataLikeItemsArrayKey = @"likeItemsArray";
 
 #pragma mark - NSCoding
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.deviceIPAddress forKey: BLSettingDataDeviceIPAddressKey];
+    [encoder encodeObject:self.likeItemsArray forKey: BLSettingDataLikeItemsArrayKey];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder
@@ -24,6 +26,13 @@ static NSString* const BLSettingDataDeviceIPAddressKey = @"deviceIPAddress";
     self = [self init];
     if (self) {
         _deviceIPAddress = [decoder decodeObjectForKey: BLSettingDataDeviceIPAddressKey];
+        _likeItemsArray = [[decoder decodeObjectForKey: BLSettingDataLikeItemsArrayKey] mutableCopy];
+        if (_likeItemsArray == nil)
+            _likeItemsArray = [[NSMutableArray alloc] init];
+        //NSUserDefaults *userDefs = [NSUserDefaults standardUserDefaults];
+//        _likeItemsArray = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:BLSettingDataLikeItemsArrayKey];
+//        if (_likeItemsArray)
+//            _likeItemsArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -44,7 +53,7 @@ static NSString* const BLSettingDataDeviceIPAddressKey = @"deviceIPAddress";
 {
     static NSString* filePath = nil;
     if (!filePath) {
-        filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"settingdata"];
+        filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"settingdata.plist"];
     }
     return filePath;
 }

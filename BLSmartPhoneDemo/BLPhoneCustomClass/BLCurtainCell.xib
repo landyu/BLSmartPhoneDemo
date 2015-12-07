@@ -1,65 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="74" id="KGk-i7-Jjw" customClass="BLCurtainCell">
-            <rect key="frame" x="0.0" y="0.0" width="404" height="74"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="43" id="KGk-i7-Jjw" customClass="BLCurtainCell">
+            <rect key="frame" x="0.0" y="0.0" width="404" height="43"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="404" height="73"/>
+                <rect key="frame" x="0.0" y="0.0" width="404" height="42"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWv-RV-L6g">
-                        <rect key="frame" x="15" y="26" width="147" height="21"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CurtainIcon" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ze-N2y">
+                        <rect key="frame" x="46" y="5" width="32" height="28"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0z-bz-3Xj">
-                        <rect key="frame" x="181" y="8" width="30" height="30"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRK-2n-eeq">
+                        <rect key="frame" x="8" y="0.0" width="30" height="36"/>
                         <animations/>
-                        <state key="normal" title="开"/>
+                        <state key="normal" image="常用功能"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUA-5x-sQk">
+                        <rect key="frame" x="115" y="6" width="281" height="30"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
-                            <action selector="curtainOpenButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jBb-qn-A4n"/>
+                            <action selector="curtainLabelButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Q6N-rt-CSd"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYc-6G-BCZ">
-                        <rect key="frame" x="260" y="8" width="30" height="30"/>
-                        <animations/>
-                        <state key="normal" title="闭"/>
-                        <connections>
-                            <action selector="curtainCloseButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="75h-f7-7ia"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8r-yb-YOl">
-                        <rect key="frame" x="335" y="8" width="30" height="30"/>
-                        <animations/>
-                        <state key="normal" title="停"/>
-                        <connections>
-                            <action selector="curtainStopButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6Lm-pv-InH"/>
-                        </connections>
-                    </button>
-                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="Tec-Sp-7dB">
-                        <rect key="frame" x="179" y="43" width="183" height="31"/>
-                        <animations/>
-                        <connections>
-                            <action selector="curtainSliderButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qxm-Rr-Bsn"/>
-                        </connections>
-                    </slider>
                 </subviews>
                 <animations/>
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="curtainNameLabel" destination="kWv-RV-L6g" id="80X-cp-o0c"/>
-                <outlet property="curtainSliderOutlet" destination="Tec-Sp-7dB" id="xNe-jM-QVY"/>
+                <outlet property="curtainLabelButtonOutlet" destination="VUA-5x-sQk" id="GnH-ws-4JP"/>
             </connections>
-            <point key="canvasLocation" x="433" y="258"/>
+            <point key="canvasLocation" x="433" y="242.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="CurtainIcon" width="56" height="41"/>
+        <image name="常用功能" width="30" height="30"/>
+    </resources>
 </document>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,29 +14,43 @@
                 <rect key="frame" x="0.0" y="0.0" width="387" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWd-r0-ybp">
+                        <rect key="frame" x="8" y="0.0" width="30" height="43"/>
+                        <animations/>
+                        <state key="normal" image="常用功能">
+                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="常用功能-Select"/>
+                        <connections>
+                            <action selector="likeButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Wbl-TB-0fj"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHy-7W-kd4">
-                        <rect key="frame" x="15" y="11" width="249" height="21"/>
+                        <rect key="frame" x="115" y="11" width="121" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="suM-mX-Uih">
-                        <rect key="frame" x="301" y="6" width="51" height="31"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SwitchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="XQT-b7-SRS">
+                        <rect key="frame" x="54" y="0.0" width="38" height="43"/>
                         <animations/>
-                        <connections>
-                            <action selector="switchButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="h4U-4N-tV5"/>
-                        </connections>
-                    </switch>
+                    </imageView>
                 </subviews>
                 <animations/>
+                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="switchButtonOutlet" destination="suM-mX-Uih" id="rji-Mm-pkz"/>
+                <outlet property="likeButtonOutlet" destination="KWd-r0-ybp" id="OTP-NT-Hhn"/>
                 <outlet property="switchNameLabel" destination="JHy-7W-kd4" id="SM8-ZO-LF6"/>
             </connections>
             <point key="canvasLocation" x="198.5" y="246"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="SwitchIcon" width="30" height="30"/>
+        <image name="常用功能" width="30" height="30"/>
+        <image name="常用功能-Select" width="30" height="30"/>
+    </resources>
 </document>

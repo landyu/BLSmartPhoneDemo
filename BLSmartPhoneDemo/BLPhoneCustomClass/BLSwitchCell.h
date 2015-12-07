@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface BLSwitchCell : UITableViewCell
-- (void)setSwitchWithName:(NSString *)switchName detailDict:(NSDictionary *)detailDict;
+//-(id)initWithPlistName:(NSString *)name indexInPlist:(NSString *)index;
+-(id)initWithPlistName:(NSString *)name indexInPlist:(NSString *)index switchName:(NSString *)switchName detailDict:(NSDictionary *)detailDict;
+-(id)initWithPlistName:(NSString *)name indexInPlist:(NSString *)index switchName:(NSString *)switchName detailDict:(NSDictionary *)detailDict reuseIdentifier:(NSString *)reuseId;
 - (void)readItemState;
 @end
