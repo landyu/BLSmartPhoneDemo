@@ -43,7 +43,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    UIGraphicsBeginImageContext([[UIScreen mainScreen] bounds].size);
+    [[UIImage imageNamed:@"Background"] drawInRect:[[UIScreen mainScreen] bounds]];
+    UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     [configImportButtonOutlet setOn:NO];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(httpServerStarted:) name:@"HTTPServerStarted" object:nil];
     // Do any additional setup after loading the view from its nib.

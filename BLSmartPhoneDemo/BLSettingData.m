@@ -13,12 +13,14 @@
 
 static NSString* const BLSettingDataDeviceIPAddressKey = @"deviceIPAddress";
 static NSString* const BLSettingDataLikeItemsArrayKey = @"likeItemsArray";
+static NSString* const BLTimmingItemsArrayKey = @"timmingItemsArray";
 
 #pragma mark - NSCoding
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.deviceIPAddress forKey: BLSettingDataDeviceIPAddressKey];
     [encoder encodeObject:self.likeItemsArray forKey: BLSettingDataLikeItemsArrayKey];
+    [encoder encodeObject:self.timmingItemsArray forKey: BLTimmingItemsArrayKey];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder
@@ -27,8 +29,13 @@ static NSString* const BLSettingDataLikeItemsArrayKey = @"likeItemsArray";
     if (self) {
         _deviceIPAddress = [decoder decodeObjectForKey: BLSettingDataDeviceIPAddressKey];
         _likeItemsArray = [[decoder decodeObjectForKey: BLSettingDataLikeItemsArrayKey] mutableCopy];
+        _timmingItemsArray = [[decoder decodeObjectForKey: BLTimmingItemsArrayKey] mutableCopy];
         if (_likeItemsArray == nil)
             _likeItemsArray = [[NSMutableArray alloc] init];
+        if (_timmingItemsArray == nil)
+        {
+            _timmingItemsArray = [[NSMutableArray alloc] init];
+        }
         //NSUserDefaults *userDefs = [NSUserDefaults standardUserDefaults];
 //        _likeItemsArray = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:BLSettingDataLikeItemsArrayKey];
 //        if (_likeItemsArray)

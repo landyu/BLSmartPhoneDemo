@@ -98,7 +98,7 @@
     [self initData];
     
     //创建一个分组样式的UITableView
-    //itemsTableView=[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    itemsTableView=[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     //itemsTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + sceneCellHight, self.view.bounds.size.width, self.view.bounds.size.height - sceneCellHight) style:UITableViewStyleGrouped];
     
     //设置数据源，注意必须实现对应的UITableViewDataSource协议
@@ -274,11 +274,11 @@
              {
                  if (currentSceneItemColumnIndex == 0)
                  {
-                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * sceneButtonWidth + 60, 15, sceneButtonWidth, sceneButtonHeight);
+                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * sceneButtonWidth + 45, 15, sceneButtonWidth, sceneButtonHeight);
                  }
                  else
                  {
-                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * (sceneButtonWidth  + 15) + 60, 15, sceneButtonWidth, sceneButtonHeight);
+                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * (sceneButtonWidth  + 15) + 45, 15, sceneButtonWidth, sceneButtonHeight);
                  }
                  
              }
@@ -286,11 +286,11 @@
              {
                  if (currentSceneItemColumnIndex == 0)
                  {
-                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * sceneButtonWidth + 60, (currentSceneItemRowIndex) * (sceneButtonHeight + 10) + 15, sceneButtonWidth, sceneButtonHeight);
+                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * sceneButtonWidth + 45, (currentSceneItemRowIndex) * (sceneButtonHeight + 10) + 15, sceneButtonWidth, sceneButtonHeight);
                  }
                  else
                  {
-                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * (sceneButtonWidth  + 15) + 60, (currentSceneItemRowIndex) * (sceneButtonHeight + 10) + 15, sceneButtonWidth, sceneButtonHeight);
+                     sceneButoon.frame = CGRectMake((currentSceneItemColumnIndex) * (sceneButtonWidth  + 15) + 45, (currentSceneItemRowIndex) * (sceneButtonHeight + 10) + 15, sceneButtonWidth, sceneButtonHeight);
                  }
                  
              }
@@ -334,30 +334,69 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSMutableArray *items;
-    if ([availableSectionTitleArray[section] isEqualToString:@"灯光"])
+    if ([sceneArray count] > 0)
     {
-        items = itemGroup[0];
+        if (section == 0)
+        {
+            return  1;
+        }
+        else
+        {
+            if ([availableSectionTitleArray[section - 1] isEqualToString:@"灯光"])
+            {
+                items = itemGroup[0];
+            }
+            else if([availableSectionTitleArray[section - 1] isEqualToString:@"调光灯"])
+            {
+                items = itemGroup[1];
+            }
+            else if([availableSectionTitleArray[section - 1] isEqualToString:@"窗帘"])
+            {
+                items = itemGroup[2];
+            }
+            else if([availableSectionTitleArray[section - 1] isEqualToString:@"空调"])
+            {
+                items = itemGroup[3];
+            }
+            else if([availableSectionTitleArray[section - 1] isEqualToString:@"地暖"])
+            {
+                items = itemGroup[4];
+            }
+            else if([availableSectionTitleArray[section - 1] isEqualToString:@"遥控"])
+            {
+                items = itemGroup[5];
+            }
+        }
+
     }
-    else if([availableSectionTitleArray[section] isEqualToString:@"调光灯"])
+    else
     {
-        items = itemGroup[1];
+        if ([availableSectionTitleArray[section] isEqualToString:@"灯光"])
+        {
+            items = itemGroup[0];
+        }
+        else if([availableSectionTitleArray[section] isEqualToString:@"调光灯"])
+        {
+            items = itemGroup[1];
+        }
+        else if([availableSectionTitleArray[section] isEqualToString:@"窗帘"])
+        {
+            items = itemGroup[2];
+        }
+        else if([availableSectionTitleArray[section] isEqualToString:@"空调"])
+        {
+            items = itemGroup[3];
+        }
+        else if([availableSectionTitleArray[section] isEqualToString:@"地暖"])
+        {
+            items = itemGroup[4];
+        }
+        else if([availableSectionTitleArray[section] isEqualToString:@"遥控"])
+        {
+            items = itemGroup[5];
+        }
     }
-    else if([availableSectionTitleArray[section] isEqualToString:@"窗帘"])
-    {
-        items = itemGroup[2];
-    }
-    else if([availableSectionTitleArray[section] isEqualToString:@"空调"])
-    {
-        items = itemGroup[3];
-    }
-    else if([availableSectionTitleArray[section] isEqualToString:@"地暖"])
-    {
-        items = itemGroup[4];
-    }
-    else if([availableSectionTitleArray[section] isEqualToString:@"遥控"])
-    {
-        items = itemGroup[5];
-    }
+    
     
     return [items count];
 }
@@ -370,110 +409,140 @@
     //NSString *cellIdentifier = String(indexPath.section) + "-" + String(indexPath.row)
     NSString *cellIdentifier = [NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil)
+    
+    if ([sceneArray count] > 0)
     {
-        //cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        
-        if ([availableSectionTitleArray[indexPath.section] isEqualToString:@"灯光"])
+        if (indexPath.section == 0)
         {
-            BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)lights[indexPath.row];
-            BLSwitchCell *switchCell = [[BLSwitchCell alloc] initWithPlistName:self.title indexInPlist:itemDetail->indexInPlist switchName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
-            //[switchCell setSwitchWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict];
-            
-            // Example of a bigger switch with images
-            //        SevenSwitch *switchButton = [[SevenSwitch alloc] initWithFrame:CGRectZero];
-            //        switchButton.center = CGPointMake(switchCell.bounds.size.width * 0.5 , switchCell.bounds.size.height * 0.5 - 80);
-            //        //[switchButton addTarget:self action:@selector(switchButtonPressed:) forControlEvents:UIControlEventValueChanged]
-            //        switchButton.offImage = [UIImage imageNamed:@"SwitchButtonBackground.png"];
-            //        switchButton.onImage = [UIImage imageNamed:@"SwitchButtonBackground.png"];
-            //        switchButton.onTintColor = [UIColor colorWithHue:0.08f saturation:0.74f brightness:1.00f alpha:1.00f];
-            //        //mySwitch2.isRounded = NO;
-            //        [switchCell addSubview:switchButton];
-            
-            // turn the switch on with animation
-            //[switchButton setOn:YES animated:YES];
-            
-            [switchCell readItemState];
-            cell = switchCell;
-            
-        }
-        else if ([availableSectionTitleArray[indexPath.section] isEqualToString:@"调光灯"])
-        {
-            BLDimmingCell *dimmingCell = [[BLDimmingCell alloc] initWithParentViewController:self];
-            BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)dimmings[indexPath.row];
-            //BLSwitchCell *switchCell = [[BLSwitchCell alloc] initWithPlistName:self.title indexInPlist:itemDetail->indexInPlist switchName:itemDetail->itemName detailDict:itemDetail->itemDetailDict];
-            [dimmingCell setSwitchWithName:itemDetail->itemName itemDetailDict:itemDetail->itemDetailDict];
-            
-            //[dimmingLight readItemState];
-            cell = dimmingCell;
-            //self.useBlurForPopup = YES;
-        }
-        else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"窗帘"])
-        {
-            //        NSString *itemName = Curtains[indexPath.row];
-            //        cell.textLabel.text=itemName;
-            //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            BLCurtainCell *curtainCell = [[BLCurtainCell alloc] initWithParentViewController:self];
-//            //[curtainCell setCurtainName:Curtains[indexPath.row]];
-            BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)curtains[indexPath.row];
-//            //[curtainCell setCurtainWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict];
-            [curtainCell setCurtainWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
-//            [curtainCell initPanelItemValue];
-//            [curtainCell readItemState];
-            cell = curtainCell;
-            
-        }
-        else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"空调"])
-        {
-            //UITableViewCell *ACCell = [tableView dequeueReusableCellWithIdentifier:@"BLACCellView"];
-            //if (ACCell ==  nil)
+            if (cell == nil)
             {
-                //BLACCellViewController *ACCellVC = [[BLACCellViewController alloc] init];
-                //return ACCellVC.acCell;
-                //            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BLACCell" owner:ACCellVC options:nil];
-                //            for(id currentObject in topLevelObjects)
-                //            {
-                //                if([currentObject isKindOfClass:[BLACCell class]])
-                //                {
-                //                    ACCell = currentObject;
-                //                    return ACCell;
-                //                }
-                //            }
+                cell =[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+                for (id obj in sceneArray)
+                {
+                    Scene *sceneItem = obj;
+                    [cell addSubview:sceneItem->button];
+                }
                 
+                UIGraphicsBeginImageContext([[UIScreen mainScreen] bounds].size);
+                [[UIImage imageNamed:@"Background"] drawInRect:[[UIScreen mainScreen] bounds]];
+                UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                UIView *bgView = [[UIView alloc] init];
+                bgView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+                cell.selectedBackgroundView = bgView;
+                cell.backgroundView = bgView;
             }
-            
-            BLACCell *ACCell = [[BLACCell alloc] initWithParentViewController:self];
-            //[ACCell setACName:ACs[indexPath.row]];
-            BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)ACs[indexPath.row];
-//            //[ACCell setACWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict];
-            [ACCell setACWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
-//            [ACCell initPanelItemValue];
-//            [ACCell readItemState];
-            cell = ACCell;
-            //return  ACCell;
         }
-        else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"地暖"])
+        else
         {
-            BLHeatingCell *heatingCell = [[BLHeatingCell alloc] initWithParentViewController:self];
-            //[ACCell setACName:ACs[indexPath.row]];
-            BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)heatings[indexPath.row];
-            //[heatingCell setHeatingWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict];
-            [heatingCell setHeatingWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
-            //[heatingCell initPanelItemValue];
-            //        [heatingCell readItemState];
-            cell = heatingCell;
-            //self.useBlurForPopup = YES;
-            //return  ACCell;
-        }
-        else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"遥控"])
-        {
-            BLRemoteControllerCell *rcCell = [[BLRemoteControllerCell alloc] initWithParentNavigationController:self.navigationController];
-            BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)rcs[indexPath.row];
-            //[rcCell setRemoteControllerWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict];
-            [rcCell setRemoteControllerWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
-            cell = rcCell;
+            if (cell == nil)
+            {
+                if ([availableSectionTitleArray[indexPath.section - 1] isEqualToString:@"灯光"])
+                {
+                    BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)lights[indexPath.row];
+                    BLSwitchCell *switchCell = [[BLSwitchCell alloc] initWithPlistName:self.title indexInPlist:itemDetail->indexInPlist switchName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                    
+                    [switchCell readItemState];
+                    cell = switchCell;
+                    
+                }
+                else if ([availableSectionTitleArray[indexPath.section - 1] isEqualToString:@"调光灯"])
+                {
+                    BLDimmingCell *dimmingCell = [[BLDimmingCell alloc] initWithParentViewController:self];
+                    BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)dimmings[indexPath.row];
+                    [dimmingCell setSwitchWithName:itemDetail->itemName itemDetailDict:itemDetail->itemDetailDict];
+                    cell = dimmingCell;
+                }
+                else if([availableSectionTitleArray[indexPath.section - 1] isEqualToString:@"窗帘"])
+                {
+                    BLCurtainCell *curtainCell = [[BLCurtainCell alloc] initWithParentViewController:self];
+                    BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)curtains[indexPath.row];
+                    [curtainCell setCurtainWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                    cell = curtainCell;
+                    
+                }
+                else if([availableSectionTitleArray[indexPath.section - 1] isEqualToString:@"空调"])
+                {
+                    
+                    BLACCell *ACCell = [[BLACCell alloc] initWithParentViewController:self];
+                    BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)ACs[indexPath.row];
+                    [ACCell setACWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                    cell = ACCell;
+                }
+                else if([availableSectionTitleArray[indexPath.section - 1] isEqualToString:@"地暖"])
+                {
+                    BLHeatingCell *heatingCell = [[BLHeatingCell alloc] initWithParentViewController:self];
+                    BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)heatings[indexPath.row];
+                    [heatingCell setHeatingWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                    cell = heatingCell;
+                }
+                else if([availableSectionTitleArray[indexPath.section - 1] isEqualToString:@"遥控"])
+                {
+                    BLRemoteControllerCell *rcCell = [[BLRemoteControllerCell alloc] initWithParentNavigationController:self.navigationController];
+                    BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)rcs[indexPath.row];
+                    //[rcCell setRemoteControllerWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict];
+                    [rcCell setRemoteControllerWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                    cell = rcCell;
+                }
+            }
         }
     }
+    else
+    {
+        if (cell == nil)
+        {
+            
+            if ([availableSectionTitleArray[indexPath.section] isEqualToString:@"灯光"])
+            {
+                BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)lights[indexPath.row];
+                BLSwitchCell *switchCell = [[BLSwitchCell alloc] initWithPlistName:self.title indexInPlist:itemDetail->indexInPlist switchName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                
+                [switchCell readItemState];
+                cell = switchCell;
+                
+            }
+            else if ([availableSectionTitleArray[indexPath.section] isEqualToString:@"调光灯"])
+            {
+                BLDimmingCell *dimmingCell = [[BLDimmingCell alloc] initWithParentViewController:self];
+                BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)dimmings[indexPath.row];
+                [dimmingCell setSwitchWithName:itemDetail->itemName itemDetailDict:itemDetail->itemDetailDict];
+                cell = dimmingCell;
+            }
+            else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"窗帘"])
+            {
+                BLCurtainCell *curtainCell = [[BLCurtainCell alloc] initWithParentViewController:self];
+                BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)curtains[indexPath.row];
+                [curtainCell setCurtainWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                cell = curtainCell;
+                
+            }
+            else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"空调"])
+            {
+                
+                BLACCell *ACCell = [[BLACCell alloc] initWithParentViewController:self];
+                BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)ACs[indexPath.row];
+                [ACCell setACWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                cell = ACCell;
+            }
+            else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"地暖"])
+            {
+                BLHeatingCell *heatingCell = [[BLHeatingCell alloc] initWithParentViewController:self];
+                BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)heatings[indexPath.row];
+                [heatingCell setHeatingWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                cell = heatingCell;
+            }
+            else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"遥控"])
+            {
+                BLRemoteControllerCell *rcCell = [[BLRemoteControllerCell alloc] initWithParentNavigationController:self.navigationController];
+                BLItemDetailPacket *itemDetail = (BLItemDetailPacket *)rcs[indexPath.row];
+                [rcCell setRemoteControllerWithName:itemDetail->itemName detailDict:itemDetail->itemDetailDict reuseIdentifier:cellIdentifier];
+                cell = rcCell;
+            }
+        }
+    }
+    
+    
     
     
     
@@ -495,37 +564,67 @@
         }
     }
     
+    if ([sceneArray count] > 0)
+    {
+        sectionNumber++;
+    }
+    
     return  sectionNumber;
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return  availableSectionTitleArray[section];
+    NSString *title = @"";
+    if ([sceneArray count] > 0)
+    {
+        if (section == 0)
+        {
+            title = @"场景";
+        }
+        else
+        {
+            title = availableSectionTitleArray[section - 1];
+        }
+    }
+    else
+    {
+        title = availableSectionTitleArray[section];
+    }
+    return  title;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([availableSectionTitleArray[indexPath.section] isEqualToString:@"空调"])
+    CGFloat rowHeight = 43.0;
+    if ([sceneArray count] > 0)
     {
-        return 43.0;
+        if (indexPath.section == 0)
+        {
+            rowHeight = sceneCellHight;
+        }
     }
-    else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"地暖"])
-    {
-        return 43.0;
-    }
-    else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"窗帘"])
-    {
-        return 43.0;
-    }
-    else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"调光灯"])
-    {
-        return 43.0;
-    }
-    else
-    {
-        return 45.0;
-    }
+//    if([availableSectionTitleArray[indexPath.section] isEqualToString:@"空调"])
+//    {
+//        return 43.0;
+//    }
+//    else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"地暖"])
+//    {
+//        return 43.0;
+//    }
+//    else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"窗帘"])
+//    {
+//        return 43.0;
+//    }
+//    else if([availableSectionTitleArray[indexPath.section] isEqualToString:@"调光灯"])
+//    {
+//        return 43.0;
+//    }
+//    else
+//    {
+//        return 45.0;
+//    }
+    return rowHeight;
 }
 
 

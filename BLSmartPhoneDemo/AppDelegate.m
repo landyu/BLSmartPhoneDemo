@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "BLSettingViewController.h"
+#import "TimmingViewController.h"
 #import "BLGCDKNXTunnellingAsyncUdpSocket.h"
 #import "BLSettingData.h"
 #import "LikeItemsViewController.h"
@@ -37,9 +38,22 @@
     UIImage* anImage = [UIImage imageNamed:@"Icon_Profile"];
     settingViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:anImage tag:2];
     
-    LikeItemsViewController *likeItemsViewController = [[LikeItemsViewController alloc] init];
-    anImage = [UIImage imageNamed:@"常用功能"];
-    likeItemsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人收藏" image:anImage tag:2];
+//    LikeItemsViewController *likeItemsViewController = [[LikeItemsViewController alloc] init];
+//    anImage = [UIImage imageNamed:@"常用功能"];
+//    likeItemsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人收藏" image:anImage tag:2];
+    
+    UINavigationController *timmingNavigationController = [[UINavigationController alloc] initWithRootViewController:[[TimmingViewController alloc] init]];
+    timmingNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemRecents tag:1];
+    timmingNavigationController.navigationBar.titleTextAttributes = @{
+                                                                      NSForegroundColorAttributeName : [UIColor whiteColor]
+                                                                      };
+    //[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    UIGraphicsBeginImageContext([timmingNavigationController navigationBar].bounds.size);
+    [[UIImage imageNamed:@"NavigationBarBackground"] drawInRect:[timmingNavigationController navigationBar].bounds];
+    UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [[timmingNavigationController navigationBar] setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    
     
     UINavigationController *BLPhoneNavigationController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc]init]];
     anImage = [UIImage imageNamed:@"Icon_Home"];
@@ -52,14 +66,15 @@
     
     UIGraphicsBeginImageContext([BLPhoneNavigationController navigationBar].bounds.size);
     [[UIImage imageNamed:@"NavigationBarBackground"] drawInRect:[BLPhoneNavigationController navigationBar].bounds];
-    UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+    backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [[BLPhoneNavigationController navigationBar] setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
     
     
     
     
-    NSArray *viewControllers = [NSArray arrayWithObjects:BLPhoneNavigationController, likeItemsViewController, settingViewController,nil];
+    //NSArray *viewControllers = [NSArray arrayWithObjects:BLPhoneNavigationController, likeItemsViewController, settingViewController,nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:BLPhoneNavigationController, timmingNavigationController, settingViewController,nil];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = viewControllers;
@@ -105,11 +120,12 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     //[BLSettingData sharedSettingData].likeItemsArray = [[LikeItems sharedInstance] getLikeItemsArrayWithArray];
-    if ([LikeItems sharedInstance]->likeItemsNeedToOverWrite == YES)
-    {
-        [[BLSettingData sharedSettingData] save];
-        [LikeItems sharedInstance]->likeItemsNeedToOverWrite = NO;
-    }
+    
+//    if ([LikeItems sharedInstance]->likeItemsNeedToOverWrite == YES)
+//    {
+//        [[BLSettingData sharedSettingData] save];
+//        [LikeItems sharedInstance]->likeItemsNeedToOverWrite = NO;
+//    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -119,8 +135,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    NSMutableArray *likeItemsArray = [BLSettingData sharedSettingData].likeItemsArray;
-    [[LikeItems sharedInstance] setLikeItemsArrayWithArray:likeItemsArray];
+    //NSMutableArray *likeItemsArray = [BLSettingData sharedSettingData].likeItemsArray;
+    //[[LikeItems sharedInstance] setLikeItemsArrayWithArray:likeItemsArray];
+    
     tunnellingShareInstance = [BLGCDKNXTunnellingAsyncUdpSocket sharedInstance];
     NSString *ipAddress = [BLSettingData sharedSettingData].deviceIPAddress;
     if (ipAddress)

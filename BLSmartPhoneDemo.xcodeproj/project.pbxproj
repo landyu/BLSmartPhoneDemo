@@ -15,6 +15,14 @@
 		173591ED1BDB5D9300DC805B /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 173591EC1BDB5D9300DC805B /* Utils.m */; };
 		173591F11BDB5E0F00DC805B /* NSMutableArray+QueueStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 173591F01BDB5E0F00DC805B /* NSMutableArray+QueueStack.m */; };
 		1745413B1C00542D00BCBF70 /* SevenSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1745413A1C00542D00BCBF70 /* SevenSwitch.swift */; };
+		17541A5F1C16B54900E22290 /* TimmingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17541A5E1C16B54900E22290 /* TimmingViewController.m */; };
+		17541A631C16C1A100E22290 /* TimmingAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17541A611C16C1A100E22290 /* TimmingAddViewController.m */; };
+		175A11971C17D1900037BCFE /* TimmingAddRepeatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A11961C17D1900037BCFE /* TimmingAddRepeatViewController.m */; };
+		175A119B1C17F35C0037BCFE /* TimmingAddLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A119A1C17F35C0037BCFE /* TimmingAddLabelViewController.m */; };
+		175A11A11C1821120037BCFE /* TimmingAddWriteToAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A11A01C1821120037BCFE /* TimmingAddWriteToAddressViewController.m */; };
+		175A11A41C182DD00037BCFE /* TimmingAddValueTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A11A31C182DD00037BCFE /* TimmingAddValueTypeViewController.m */; };
+		175A11A71C1831730037BCFE /* TimmingAddSendValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A11A61C1831730037BCFE /* TimmingAddSendValueViewController.m */; };
+		175A11AB1C1865FF0037BCFE /* TimmingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 175A11A91C1865FF0037BCFE /* TimmingItemTableViewCell.m */; };
 		176BB6B61BD9C902006C2159 /* BLACCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 176BB6B41BD9C902006C2159 /* BLACCell.m */; };
 		176BB6B71BD9C902006C2159 /* BLACCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176BB6B51BD9C902006C2159 /* BLACCell.xib */; };
 		176BB6BC1BD9E110006C2159 /* BLCurtainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 176BB6BA1BD9E110006C2159 /* BLCurtainCell.m */; };
@@ -119,6 +127,22 @@
 		173591EF1BDB5E0F00DC805B /* NSMutableArray+QueueStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+QueueStack.h"; path = "BLPhoneCustomClass/NSMutableArray+QueueStack.h"; sourceTree = "<group>"; };
 		173591F01BDB5E0F00DC805B /* NSMutableArray+QueueStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+QueueStack.m"; path = "BLPhoneCustomClass/NSMutableArray+QueueStack.m"; sourceTree = "<group>"; };
 		1745413A1C00542D00BCBF70 /* SevenSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SevenSwitch.swift; sourceTree = "<group>"; };
+		17541A5D1C16B54900E22290 /* TimmingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingViewController.h; path = BLSmartPhoneDemo/TimmingViewController.h; sourceTree = "<group>"; };
+		17541A5E1C16B54900E22290 /* TimmingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingViewController.m; path = BLSmartPhoneDemo/TimmingViewController.m; sourceTree = "<group>"; };
+		17541A601C16C1A100E22290 /* TimmingAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingAddViewController.h; path = BLSmartPhoneDemo/TimmingAddViewController.h; sourceTree = "<group>"; };
+		17541A611C16C1A100E22290 /* TimmingAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingAddViewController.m; path = BLSmartPhoneDemo/TimmingAddViewController.m; sourceTree = "<group>"; };
+		175A11951C17D1900037BCFE /* TimmingAddRepeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingAddRepeatViewController.h; path = BLSmartPhoneDemo/TimmingAddRepeatViewController.h; sourceTree = "<group>"; };
+		175A11961C17D1900037BCFE /* TimmingAddRepeatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingAddRepeatViewController.m; path = BLSmartPhoneDemo/TimmingAddRepeatViewController.m; sourceTree = "<group>"; };
+		175A11991C17F35C0037BCFE /* TimmingAddLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingAddLabelViewController.h; path = BLSmartPhoneDemo/TimmingAddLabelViewController.h; sourceTree = "<group>"; };
+		175A119A1C17F35C0037BCFE /* TimmingAddLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingAddLabelViewController.m; path = BLSmartPhoneDemo/TimmingAddLabelViewController.m; sourceTree = "<group>"; };
+		175A119F1C1821120037BCFE /* TimmingAddWriteToAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingAddWriteToAddressViewController.h; path = BLSmartPhoneDemo/TimmingAddWriteToAddressViewController.h; sourceTree = "<group>"; };
+		175A11A01C1821120037BCFE /* TimmingAddWriteToAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingAddWriteToAddressViewController.m; path = BLSmartPhoneDemo/TimmingAddWriteToAddressViewController.m; sourceTree = "<group>"; };
+		175A11A21C182DD00037BCFE /* TimmingAddValueTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingAddValueTypeViewController.h; path = BLSmartPhoneDemo/TimmingAddValueTypeViewController.h; sourceTree = "<group>"; };
+		175A11A31C182DD00037BCFE /* TimmingAddValueTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingAddValueTypeViewController.m; path = BLSmartPhoneDemo/TimmingAddValueTypeViewController.m; sourceTree = "<group>"; };
+		175A11A51C1831730037BCFE /* TimmingAddSendValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingAddSendValueViewController.h; path = BLSmartPhoneDemo/TimmingAddSendValueViewController.h; sourceTree = "<group>"; };
+		175A11A61C1831730037BCFE /* TimmingAddSendValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingAddSendValueViewController.m; path = BLSmartPhoneDemo/TimmingAddSendValueViewController.m; sourceTree = "<group>"; };
+		175A11A81C1865FF0037BCFE /* TimmingItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimmingItemTableViewCell.h; path = BLSmartPhoneDemo/TimmingItemTableViewCell.h; sourceTree = "<group>"; };
+		175A11A91C1865FF0037BCFE /* TimmingItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimmingItemTableViewCell.m; path = BLSmartPhoneDemo/TimmingItemTableViewCell.m; sourceTree = "<group>"; };
 		176BB6B31BD9C902006C2159 /* BLACCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLACCell.h; path = BLPhoneCustomClass/BLACCell.h; sourceTree = "<group>"; };
 		176BB6B41BD9C902006C2159 /* BLACCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLACCell.m; path = BLPhoneCustomClass/BLACCell.m; sourceTree = "<group>"; };
 		176BB6B51BD9C902006C2159 /* BLACCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BLACCell.xib; path = BLPhoneCustomClass/BLACCell.xib; sourceTree = "<group>"; };
@@ -319,6 +343,23 @@
 				173591E71BDB597000DC805B /* GCDAsyncUdpSocket.m */,
 			);
 			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
+		175A11941C17D1230037BCFE /* TimmingAddSubPage */ = {
+			isa = PBXGroup;
+			children = (
+				175A11951C17D1900037BCFE /* TimmingAddRepeatViewController.h */,
+				175A11961C17D1900037BCFE /* TimmingAddRepeatViewController.m */,
+				175A11991C17F35C0037BCFE /* TimmingAddLabelViewController.h */,
+				175A119A1C17F35C0037BCFE /* TimmingAddLabelViewController.m */,
+				175A119F1C1821120037BCFE /* TimmingAddWriteToAddressViewController.h */,
+				175A11A01C1821120037BCFE /* TimmingAddWriteToAddressViewController.m */,
+				175A11A21C182DD00037BCFE /* TimmingAddValueTypeViewController.h */,
+				175A11A31C182DD00037BCFE /* TimmingAddValueTypeViewController.m */,
+				175A11A51C1831730037BCFE /* TimmingAddSendValueViewController.h */,
+				175A11A61C1831730037BCFE /* TimmingAddSendValueViewController.m */,
+			);
+			name = TimmingAddSubPage;
 			sourceTree = "<group>";
 		};
 		176BB6A01BD8ABF1006C2159 /* BLPhoneCustomClass */ = {
@@ -582,6 +623,13 @@
 				17899C351BEC3BAA00D9BEB7 /* ThirdPart */,
 				1794A5AC1BE77D3100047CA2 /* SimpleFileUploadServer */,
 				173591DF1BDB572900DC805B /* GlobalMacro.h */,
+				175A11941C17D1230037BCFE /* TimmingAddSubPage */,
+				17541A601C16C1A100E22290 /* TimmingAddViewController.h */,
+				17541A611C16C1A100E22290 /* TimmingAddViewController.m */,
+				17541A5D1C16B54900E22290 /* TimmingViewController.h */,
+				17541A5E1C16B54900E22290 /* TimmingViewController.m */,
+				175A11A81C1865FF0037BCFE /* TimmingItemTableViewCell.h */,
+				175A11A91C1865FF0037BCFE /* TimmingItemTableViewCell.m */,
 				17A9D2301BEB000B00D02E2D /* LikeItemsViewController.h */,
 				17A9D2311BEB000B00D02E2D /* LikeItemsViewController.m */,
 				17899C391BEC421D00D9BEB7 /* LikeItems.h */,
@@ -794,15 +842,21 @@
 			files = (
 				177930841BE8EC61009FBA42 /* unzip.c in Sources */,
 				1794A58C1BE779BE00047CA2 /* HTTPErrorResponse.m in Sources */,
+				175A11AB1C1865FF0037BCFE /* TimmingItemTableViewCell.m in Sources */,
 				178DD7AE1BE47EC90049F83F /* BLSettingViewController.m in Sources */,
+				175A119B1C17F35C0037BCFE /* TimmingAddLabelViewController.m in Sources */,
 				173591EA1BDB597000DC805B /* GCDAsyncUdpSocket.m in Sources */,
 				1794A5AA1BE77A6E00047CA2 /* DispatchQueueLogFormatter.m in Sources */,
 				1794A5871BE779BE00047CA2 /* MultipartMessageHeader.m in Sources */,
 				1794A5811BE779BE00047CA2 /* DDRange.m in Sources */,
 				1794A5851BE779BE00047CA2 /* HTTPServer.m in Sources */,
 				1745413B1C00542D00BCBF70 /* SevenSwitch.swift in Sources */,
+				175A11A41C182DD00037BCFE /* TimmingAddValueTypeViewController.m in Sources */,
+				175A11971C17D1900037BCFE /* TimmingAddRepeatViewController.m in Sources */,
 				173591E81BDB597000DC805B /* BLGCDKNXTunnellingAsyncUdpSocket.m in Sources */,
 				173591ED1BDB5D9300DC805B /* Utils.m in Sources */,
+				17541A5F1C16B54900E22290 /* TimmingViewController.m in Sources */,
+				175A11A71C1831730037BCFE /* TimmingAddSendValueViewController.m in Sources */,
 				1794A57F1BE779BE00047CA2 /* DDData.m in Sources */,
 				1794A5B21BE77D3100047CA2 /* MyHTTPConnection.m in Sources */,
 				173591F11BDB5E0F00DC805B /* NSMutableArray+QueueStack.m in Sources */,
@@ -841,11 +895,13 @@
 				17899C381BEC3D7100D9BEB7 /* LikeItemsTableViewController.m in Sources */,
 				17CE8B261C05D83900AF4E6B /* BLRemoteControllerViewController.m in Sources */,
 				17D1AAFE1BD5EBDD00C23E12 /* AppDelegate.m in Sources */,
+				17541A631C16C1A100E22290 /* TimmingAddViewController.m in Sources */,
 				179C3E6A1C0DBB5200DF9E58 /* UIViewController+CWPopup.m in Sources */,
 				1794A5861BE779BE00047CA2 /* MultipartFormDataParser.m in Sources */,
 				1794A5A51BE77A6E00047CA2 /* DDASLLogger.m in Sources */,
 				17D1AAFB1BD5EBDD00C23E12 /* main.m in Sources */,
 				1794A5881BE779BE00047CA2 /* MultipartMessageHeaderField.m in Sources */,
+				175A11A11C1821120037BCFE /* TimmingAddWriteToAddressViewController.m in Sources */,
 				1794A5831BE779BE00047CA2 /* HTTPConnection.m in Sources */,
 				17899C3B1BEC421D00D9BEB7 /* LikeItems.m in Sources */,
 				1794A58D1BE779BE00047CA2 /* HTTPFileResponse.m in Sources */,
